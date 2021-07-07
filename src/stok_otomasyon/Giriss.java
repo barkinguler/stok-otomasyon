@@ -11,7 +11,6 @@ import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 
 /**
- *
  * @author brkn_
  */
 public class Giriss extends javax.swing.JFrame {
@@ -63,108 +62,102 @@ public class Giriss extends javax.swing.JFrame {
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(94, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(164, 164, 164))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2))
-                        .addGap(54, 54, 54)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
-                            .addComponent(jPasswordField1))
-                        .addGap(198, 198, 198))))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(49, 49, 49)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                                .addContainerGap(94, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(164, 164, 164))
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                        .addComponent(jLabel1)
+                                                        .addComponent(jLabel2))
+                                                .addGap(54, 54, 54)
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                                        .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
+                                                        .addComponent(jPasswordField1))
+                                                .addGap(198, 198, 198))))
+                        .addGroup(layout.createSequentialGroup()
+                                .addGap(49, 49, 49)
+                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(103, 103, 103)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
-                .addGap(37, 37, 37)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
-                .addGap(34, 34, 34)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 90, Short.MAX_VALUE)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(39, 39, 39))
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                                .addGap(103, 103, 103)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel1))
+                                .addGap(37, 37, 37)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel2))
+                                .addGap(34, 34, 34)
+                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 90, Short.MAX_VALUE)
+                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(39, 39, 39))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-Connection conn=null;
+        Connection conn = null;
 
-int secim=20;
+        int secim = 20;
         ResultSet result;
-        String sifre1=null;
-        String pozisyon=null;
-        PreparedStatement preparedStatement=null;
-        try{
-conn=connect.getcon1();
-if(jPasswordField1.getPassword().equals("")&&jTextField2.getText().equals("")){
-    
-    JOptionPane.showMessageDialog(null, "! Hatalı Giriş!");
-    throw new Exception("hata");
-}
-                    preparedStatement=conn.prepareStatement("SELECT KULLANICISIFRE,POZİSYON from BILGILER WHERE KULLANICIAD=?");
+        String sifre1 = null;
+        String pozisyon = null;
+        PreparedStatement preparedStatement = null;
+        try {
+            conn = connect.getcon1();
+            if (jPasswordField1.getPassword().equals("") && jTextField2.getText().equals("")) {
 
-                    preparedStatement.setString(1, jTextField2.getText());
-                    result = preparedStatement.executeQuery();
+                JOptionPane.showMessageDialog(null, "! Hatalı Giriş!");
+                throw new Exception("hata");
+            }
+            preparedStatement = conn.prepareStatement("SELECT KULLANICISIFRE,POZİSYON from BILGILER WHERE KULLANICIAD=?");
 
-                    while(result.next()){
+            preparedStatement.setString(1, jTextField2.getText());
+            result = preparedStatement.executeQuery();
 
-                        sifre1=(result.getString("KULLANICISIFRE"));
-                        pozisyon=(result.getString("POZİSYON"));
-                        System.out.print(sifre1);
-                    }
-System.out.print(jPasswordField1.getPassword().toString());
-System.out.print(sifre1);
+            while (result.next()) {
 
-                      if(String.valueOf(jPasswordField1.getPassword()).equals(sifre1)){
+                sifre1 = (result.getString("KULLANICISIFRE"));
+                pozisyon = (result.getString("POZİSYON"));
+                System.out.print(sifre1);
+            }
+            System.out.print(jPasswordField1.getPassword().toString());
+            System.out.print(sifre1);
 
-                          if(pozisyon.equals("Admin"))
-                          {
-                              Admin.main(true);
-                                  setVisible(false);  
-                          }
-                          else if(pozisyon.equals("Kullanıcı"))
-                          {
-                                  Kullanıcı.main(true);
-                                  setVisible(false);
-                          
-                          
-                          }
+            if (String.valueOf(jPasswordField1.getPassword()).equals(sifre1)) {
 
-                      }
-                      
-                      else
-                          JOptionPane.showMessageDialog(null, "! Hatalı Giriş!");
+                if (pozisyon.equals("Admin")) {
+                    Admin.main(true);
+                    setVisible(false);
+                } else if (pozisyon.equals("Kullanıcı")) {
+                    Kullanıcı.main(true);
+                    setVisible(false);
+
 
                 }
-                catch(Exception e){
 
-                    System.out.print("hataaaaaa");
-                }
+            } else
+                JOptionPane.showMessageDialog(null, "! Hatalı Giriş!");
+
+        } catch (Exception e) {
+
+            System.out.print("hataaaaaa");
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        
-        
+
+
         Müşteri.main(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -175,7 +168,7 @@ System.out.print(sifre1);
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {

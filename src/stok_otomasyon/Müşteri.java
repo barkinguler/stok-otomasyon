@@ -13,7 +13,6 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
- *
  * @author brkn_
  */
 public class Müşteri extends javax.swing.JFrame {
@@ -21,82 +20,68 @@ public class Müşteri extends javax.swing.JFrame {
     /**
      * Creates new form Müşteri
      */
-    public ArrayList<Stokdto> Listearama (int deger){
-    ArrayList<Stokdto> stoklist=new ArrayList<Stokdto>();
-    PreparedStatement ps=null;
-    ResultSet rs=null;
-    Connection con=null;
-    try{
-        
-         con=connect.getcon2();
-         
-        ps = con.prepareStatement("SELECT * FROM MUSTERI WHERE HAREKETNO=?");
-            
-        ps.setInt(1,deger);
-        System.out.print(deger);
-        rs = ps.executeQuery();
-        
-    
-        
-        
-    Stokdto stok;
-    
-    
-    while(rs.next()){
-        stok=new Stokdto(rs.getInt("DEPONO"),rs.getInt("HAREKETNO"),rs.getString("TARIH"),rs.getString("HAREKET"),rs.getString("URUNAD")
+    public ArrayList<Stokdto> Listearama(int deger) {
+        ArrayList<Stokdto> stoklist = new ArrayList<Stokdto>();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        Connection con = null;
+        try {
 
-        );
-        stoklist.add(stok);
-       
+            con = connect.getcon2();
+
+            ps = con.prepareStatement("SELECT * FROM MUSTERI WHERE HAREKETNO=?");
+
+            ps.setInt(1, deger);
+            System.out.print(deger);
+            rs = ps.executeQuery();
+
+
+            Stokdto stok;
+
+
+            while (rs.next()) {
+                stok = new Stokdto(rs.getInt("DEPONO"), rs.getInt("HAREKETNO"), rs.getString("TARIH"), rs.getString("HAREKET"), rs.getString("URUNAD")
+
+                );
+                stoklist.add(stok);
+
+            }
+            con.close();
+            ps.close();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+        return stoklist;
     }
-    con.close();
-    ps.close();
-    }
-    catch(Exception e){
-     JOptionPane.showMessageDialog(null, e);
-    }
-    return stoklist;
-    }
-    
-               public void bulhareket(){
-    DefaultTableModel model=(DefaultTableModel)aa.getModel() ;
-    ArrayList<Stokdto> stok=null;
-    
-    stok=Listearama(Integer.parseInt(jTextField1.getText()));
-     
-   
- 
-  
 
-model.setColumnIdentifiers(new Object []{"HAREKETNO","URUNAD","DEPONO","TARIH","HAREKET"});
-Object[] row =new Object[5];
+    public void bulhareket() {
+        DefaultTableModel model = (DefaultTableModel) aa.getModel();
+        ArrayList<Stokdto> stok = null;
 
-for(int i=0;i<stok.size();i++){
+        stok = Listearama(Integer.parseInt(jTextField1.getText()));
 
 
-row[0]=stok.get(i).getHareketno();
-row[1]=stok.get(i).getUrunad();
-row[2]=stok.get(i).getDepono();
-row[3]=stok.get(i).getTarih();
-row[4]=stok.get(i).getHareket();
+        model.setColumnIdentifiers(new Object[]{"HAREKETNO", "URUNAD", "DEPONO", "TARIH", "HAREKET"});
+        Object[] row = new Object[5];
+
+        for (int i = 0; i < stok.size(); i++) {
 
 
+            row[0] = stok.get(i).getHareketno();
+            row[1] = stok.get(i).getUrunad();
+            row[2] = stok.get(i).getDepono();
+            row[3] = stok.get(i).getTarih();
+            row[4] = stok.get(i).getHareket();
 
 
+            model.addRow(row);
 
 
-
-
-model.addRow(row);
-
-
-}
+        }
 //jTable1.add(model);
-}
-    
-    
-    
-    
+    }
+
+
     public Müşteri() {
         initComponents();
     }
@@ -121,15 +106,15 @@ model.addRow(row);
         setTitle("Müşteri ekranı");
 
         aa.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {},
-                {},
-                {},
-                {}
-            },
-            new String [] {
+                new Object[][]{
+                        {},
+                        {},
+                        {},
+                        {}
+                },
+                new String[]{
 
-            }
+                }
         ));
         jScrollPane1.setViewportView(aa);
 
@@ -152,39 +137,39 @@ model.addRow(row);
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(31, 31, 31)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 517, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(109, 109, 109)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton2)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(113, Short.MAX_VALUE))
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                                .addGap(31, 31, 31)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 517, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addGap(18, 18, 18)
+                                                .addComponent(jLabel1)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addGap(109, 109, 109)
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addComponent(jButton2)
+                                                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addContainerGap(113, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 424, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(30, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(152, 152, 152)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
-                .addGap(18, 18, 18)
-                .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton2)
-                .addGap(83, 83, 83))
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 424, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(30, Short.MAX_VALUE))
+                        .addGroup(layout.createSequentialGroup()
+                                .addGap(152, 152, 152)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel1))
+                                .addGap(18, 18, 18)
+                                .addComponent(jButton1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jButton2)
+                                .addGap(83, 83, 83))
         );
 
         pack();
@@ -193,18 +178,18 @@ model.addRow(row);
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         DefaultTableModel dm = (DefaultTableModel) aa.getModel();
-    dm.getDataVector().removeAllElements();
-    revalidate();
-        
+        dm.getDataVector().removeAllElements();
+        revalidate();
+
         bulhareket();
         aa.setVisible(true);
-        
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-Giriss ulas=new Giriss();
-ulas.setVisible(true);
-super.setVisible(false);
+        Giriss ulas = new Giriss();
+        ulas.setVisible(true);
+        super.setVisible(false);
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -215,7 +200,7 @@ super.setVisible(false);
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {

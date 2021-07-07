@@ -6,12 +6,11 @@
 package stok_otomasyon;
 
 /**
- *
  * @author brkn_
  */
 public class Stokdto {
     private float fark;
-    private int depono ;
+    private int depono;
     private String depoad;
     private String depoadres;
     private int hareketno;
@@ -29,27 +28,27 @@ public class Stokdto {
     private String olay;
     private String kategori;
 
-    public Stokdto(int depono,String urunad, int urunbarkod, int miktar, float birimfiyat, String kategori) {
+    public Stokdto(int depono, String urunad, int urunbarkod, int miktar, float birimfiyat, String kategori) {
         this.urunad = urunad;
         this.urunbarkod = urunbarkod;
         this.miktar = miktar;
         this.birimfiyat = birimfiyat;
         this.kategori = kategori;
-        this.depono=depono;
-       
+        this.depono = depono;
+
     }
-      public Stokdto(float fark,int depono,String urunad, int urunbarkod, int miktar, float birimfiyat, String kategori) {
+
+    public Stokdto(float fark, int depono, String urunad, int urunbarkod, int miktar, float birimfiyat, String kategori) {
         this.urunad = urunad;
         this.urunbarkod = urunbarkod;
         this.miktar = miktar;
         this.birimfiyat = birimfiyat;
         this.kategori = kategori;
-        this.depono=depono;
-        this.fark=fark;
-       
+        this.depono = depono;
+        this.fark = fark;
+
     }
-    
-    
+
 
     public Stokdto(int depono, String depoad, String depoadres, int hareketno, String tarih, String hareket, String urunad, int urunbarkod, int miktar, float birimfiyat, String kategori) {
         this.depono = depono;
@@ -64,8 +63,7 @@ public class Stokdto {
         this.birimfiyat = birimfiyat;
         this.kategori = kategori;
     }
-    
-    
+
 
     public Stokdto(int hareketno, int miktar, float birimfiyat) {
         this.hareketno = hareketno;
@@ -78,14 +76,12 @@ public class Stokdto {
         this.miktar = miktar;
     }
 
-   
-    
-    
-     public Stokdto(String tarih,int hareketno, String olay) {
+
+    public Stokdto(String tarih, int hareketno, String olay) {
         this.tarih = tarih;
         this.hareketno = hareketno;
         this.olay = olay;
-        
+
     }
 
 
@@ -132,7 +128,7 @@ public class Stokdto {
         this.birimfiyat = birimfiyat;
     }
 
-    public Stokdto(float fark, int depono, String depoad, String depoadres, int hareketno, String tarih, String hareket, String urunad, int urunbarkod, int miktar, float birimfiyat,String kategori) {
+    public Stokdto(float fark, int depono, String depoad, String depoadres, int hareketno, String tarih, String hareket, String urunad, int urunbarkod, int miktar, float birimfiyat, String kategori) {
         this.fark = fark;
         this.depono = depono;
         this.depoad = depoad;
@@ -144,7 +140,7 @@ public class Stokdto {
         this.urunbarkod = urunbarkod;
         this.miktar = miktar;
         this.birimfiyat = birimfiyat;
-        this.kategori=kategori;
+        this.kategori = kategori;
     }
 
     public String getKategori() {
@@ -218,9 +214,6 @@ public class Stokdto {
     public float getBirimfiyat() {
         return birimfiyat;
     }
-    
-    
-    
-    
-    
+
+
 }

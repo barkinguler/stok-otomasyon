@@ -14,7 +14,6 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
- *
  * @author brkn_
  */
 public class Admin extends javax.swing.JFrame {
@@ -22,302 +21,249 @@ public class Admin extends javax.swing.JFrame {
     /**
      * Creates new form Admin
      */
-    
-      public ArrayList<Stokdto> Liste (){
-    ArrayList<Stokdto> stoklist=new ArrayList<Stokdto>();
-    PreparedStatement ps=null;
-    ResultSet rs=null;
-    Connection con=null;
-    try{
-        
-         con=connect.getcon1();
-         
-        ps = con.prepareStatement("SELECT * FROM BILGILER");
-            
-        
-        rs = ps.executeQuery();
-        
-    
-        
-        
-    Stokdto stok;
-    
-    
-    while(rs.next()){
-        stok=new Stokdto(rs.getString("KULLANICIAD"),rs.getString("KULLANICISIFRE"),rs.getString("ISIM"),rs.getString("SOYISIM"),rs.getString("POZİSYON")
 
-        );
-        stoklist.add(stok);
-       
+    public ArrayList<Stokdto> Liste() {
+        ArrayList<Stokdto> stoklist = new ArrayList<Stokdto>();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        Connection con = null;
+        try {
+
+            con = connect.getcon1();
+
+            ps = con.prepareStatement("SELECT * FROM BILGILER");
+
+
+            rs = ps.executeQuery();
+
+
+            Stokdto stok;
+
+
+            while (rs.next()) {
+                stok = new Stokdto(rs.getString("KULLANICIAD"), rs.getString("KULLANICISIFRE"), rs.getString("ISIM"), rs.getString("SOYISIM"), rs.getString("POZİSYON")
+
+                );
+                stoklist.add(stok);
+
+            }
+            con.close();
+            ps.close();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+        return stoklist;
     }
-    con.close();
-    ps.close();
+
+
+    public ArrayList<Stokdto> Listeyedek() {
+        ArrayList<Stokdto> stoklist = new ArrayList<Stokdto>();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        Connection con = null;
+        try {
+
+            con = connect.getcon1();
+
+            ps = con.prepareStatement("SELECT * FROM HAREKET_YEDEK");
+
+
+            rs = ps.executeQuery();
+
+
+            Stokdto stok;
+
+
+            while (rs.next()) {
+                stok = new Stokdto(rs.getString("TARIH"), rs.getInt("HAREKETNO"), rs.getString("OLAY")
+
+                );
+                stoklist.add(stok);
+
+            }
+            con.close();
+            ps.close();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+        return stoklist;
     }
-    catch(Exception e){
-     JOptionPane.showMessageDialog(null, e);
+
+    public ArrayList<Stokdto> yedekara(int no) {
+        ArrayList<Stokdto> stoklist = new ArrayList<Stokdto>();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        Connection con = null;
+        try {
+
+            con = connect.getcon1();
+
+            ps = con.prepareStatement("SELECT * FROM HAREKET_YEDEK WHERE HAREKETNO=?");
+
+            ps.setInt(1, no);
+            rs = ps.executeQuery();
+
+
+            Stokdto stok;
+
+
+            while (rs.next()) {
+                stok = new Stokdto(rs.getString("TARIH"), rs.getInt("HAREKETNO"), rs.getString("OLAY")
+
+                );
+                stoklist.add(stok);
+                ;
+
+            }
+            con.close();
+            ps.close();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+        return stoklist;
     }
-    return stoklist;
+
+
+    public ArrayList<Stokdto> Listeara(String ad) {
+        ArrayList<Stokdto> stoklist = new ArrayList<Stokdto>();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        Connection con = null;
+        try {
+
+            con = connect.getcon1();
+
+            ps = con.prepareStatement("SELECT * FROM BILGILER WHERE KULLANICIAD=?");
+
+            ps.setString(1, ad);
+            rs = ps.executeQuery();
+
+
+            Stokdto stok;
+
+
+            while (rs.next()) {
+                stok = new Stokdto(rs.getString("KULLANICIAD"), rs.getString("KULLANICISIFRE"), rs.getString("ISIM"), rs.getString("SOYISIM"), rs.getString("POZİSYON")
+
+                );
+                stoklist.add(stok);
+
+            }
+            con.close();
+            ps.close();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+        return stoklist;
     }
-      
-      
-        public ArrayList<Stokdto> Listeyedek (){
-    ArrayList<Stokdto> stoklist=new ArrayList<Stokdto>();
-    PreparedStatement ps=null;
-    ResultSet rs=null;
-    Connection con=null;
-    try{
-        
-         con=connect.getcon1();
-         
-        ps = con.prepareStatement("SELECT * FROM HAREKET_YEDEK");
-            
-        
-        rs = ps.executeQuery();
-        
-    
-        
-        
-    Stokdto stok;
-    
-    
-    while(rs.next()){
-        stok=new Stokdto(rs.getString("TARIH"),rs.getInt("HAREKETNO"),rs.getString("OLAY")
 
-        );
-        stoklist.add(stok);
-       
-    }
-    con.close();
-    ps.close();
-    }
-    catch(Exception e){
-     JOptionPane.showMessageDialog(null, e);
-    }
-    return stoklist;
-    }
-      
-     public ArrayList<Stokdto> yedekara (int no){
-    ArrayList<Stokdto> stoklist=new ArrayList<Stokdto>();
-    PreparedStatement ps=null;
-    ResultSet rs=null;
-    Connection con=null;
-    try{
-        
-         con=connect.getcon1();
-         
-        ps = con.prepareStatement("SELECT * FROM HAREKET_YEDEK WHERE HAREKETNO=?");
-            
-        ps.setInt(1,no);
-        rs = ps.executeQuery();
-        
-    
-        
-        
-    Stokdto stok;
-    
-    
-      while(rs.next()){
-        stok=new Stokdto(rs.getString("TARIH"),rs.getInt("HAREKETNO"),rs.getString("OLAY")
+    public void bulara() {
+        DefaultTableModel model = (DefaultTableModel) aa.getModel();
+        ArrayList<Stokdto> stok = null;
 
-        );
-        stoklist.add(stok);;
-       
-    }
-    con.close();
-    ps.close();
-    }
-    catch(Exception e){
-     JOptionPane.showMessageDialog(null, e);
-    }
-    return stoklist;
-    } 
-        
-        
-        
-      
-      public ArrayList<Stokdto> Listeara (String ad){
-    ArrayList<Stokdto> stoklist=new ArrayList<Stokdto>();
-    PreparedStatement ps=null;
-    ResultSet rs=null;
-    Connection con=null;
-    try{
-        
-         con=connect.getcon1();
-         
-        ps = con.prepareStatement("SELECT * FROM BILGILER WHERE KULLANICIAD=?");
-            
-        ps.setString(1, ad);
-        rs = ps.executeQuery();
-        
-    
-        
-        
-    Stokdto stok;
-    
-    
-    while(rs.next()){
-        stok=new Stokdto(rs.getString("KULLANICIAD"),rs.getString("KULLANICISIFRE"),rs.getString("ISIM"),rs.getString("SOYISIM"),rs.getString("POZİSYON")
-
-        );
-        stoklist.add(stok);
-       
-    }
-    con.close();
-    ps.close();
-    }
-    catch(Exception e){
-     JOptionPane.showMessageDialog(null, e);
-    }
-    return stoklist;
-    }
-      
-      public void bulara(){
-    DefaultTableModel model=(DefaultTableModel)aa.getModel() ;
-    ArrayList<Stokdto> stok=null;
-    
-    stok=Listeara(jTextField1.getText());
-     
-   
- 
-  
-
-model.setColumnIdentifiers(new Object []{"KULLANICIAD","KULLANICISIFRE","ISIM","SOYISIM","POZİSYON"});
-Object[] row =new Object[5];
-
-for(int i=0;i<stok.size();i++){
+        stok = Listeara(jTextField1.getText());
 
 
-row[0]=stok.get(i).getKullanıcıad();
-row[1]=stok.get(i).getKullanıcısifre();
-row[2]=stok.get(i).getIsim();
-row[3]=stok.get(i).getSoyisim();
-row[4]=stok.get(i).getPozisyon();
+        model.setColumnIdentifiers(new Object[]{"KULLANICIAD", "KULLANICISIFRE", "ISIM", "SOYISIM", "POZİSYON"});
+        Object[] row = new Object[5];
+
+        for (int i = 0; i < stok.size(); i++) {
 
 
+            row[0] = stok.get(i).getKullanıcıad();
+            row[1] = stok.get(i).getKullanıcısifre();
+            row[2] = stok.get(i).getIsim();
+            row[3] = stok.get(i).getSoyisim();
+            row[4] = stok.get(i).getPozisyon();
 
 
+            model.addRow(row);
 
 
-
-
-model.addRow(row);
-
-
-}
+        }
 //jTable1.add(model);
-}
-      
- public void bulyedekara(){
-    DefaultTableModel model=(DefaultTableModel)aa.getModel() ;
-    ArrayList<Stokdto> stok=null;
-    
-    stok=yedekara(Integer.parseInt(jTextField7.getText()));
-     
-   
- 
-  
+    }
 
-model.setColumnIdentifiers(new Object []{"HAREKETNO","TARIH","OLAY"});
-Object[] row =new Object[3];
+    public void bulyedekara() {
+        DefaultTableModel model = (DefaultTableModel) aa.getModel();
+        ArrayList<Stokdto> stok = null;
 
-for(int i=0;i<stok.size();i++){
+        stok = yedekara(Integer.parseInt(jTextField7.getText()));
 
 
-row[0]=stok.get(i).getHareketno();
-row[1]=stok.get(i).getTarih();
-row[2]=stok.get(i).getOlay();
+        model.setColumnIdentifiers(new Object[]{"HAREKETNO", "TARIH", "OLAY"});
+        Object[] row = new Object[3];
+
+        for (int i = 0; i < stok.size(); i++) {
 
 
+            row[0] = stok.get(i).getHareketno();
+            row[1] = stok.get(i).getTarih();
+            row[2] = stok.get(i).getOlay();
 
 
+            model.addRow(row);
 
 
-
-
-
-model.addRow(row);
-
-
-}
+        }
 //jTable1.add(model);
-}      
-      
-      
-      
-      
- public void bulyedek(){
-    DefaultTableModel model=(DefaultTableModel)aa.getModel() ;
-    ArrayList<Stokdto> stok=null;
-    
-    stok=Listeyedek();
-     
-   
- 
-  
-
-model.setColumnIdentifiers(new Object []{"HAREKETNO","TARIH","OLAY"});
-Object[] row =new Object[3];
-
-for(int i=0;i<stok.size();i++){
+    }
 
 
-row[0]=stok.get(i).getHareketno();
-row[1]=stok.get(i).getTarih();
-row[2]=stok.get(i).getOlay();
+    public void bulyedek() {
+        DefaultTableModel model = (DefaultTableModel) aa.getModel();
+        ArrayList<Stokdto> stok = null;
+
+        stok = Listeyedek();
 
 
+        model.setColumnIdentifiers(new Object[]{"HAREKETNO", "TARIH", "OLAY"});
+        Object[] row = new Object[3];
+
+        for (int i = 0; i < stok.size(); i++) {
 
 
+            row[0] = stok.get(i).getHareketno();
+            row[1] = stok.get(i).getTarih();
+            row[2] = stok.get(i).getOlay();
 
 
+            model.addRow(row);
 
 
-
-model.addRow(row);
-
-
-}
+        }
 //jTable1.add(model);
-}     
-      
-    
-                   public void bul(){
-    DefaultTableModel model=(DefaultTableModel)aa.getModel() ;
-    ArrayList<Stokdto> stok=null;
-    
-    stok=Liste();
-     
-   
- 
-  
-
-model.setColumnIdentifiers(new Object []{"KULLANICIAD","KULLANICISIFRE","ISIM","SOYISIM","POZİSYON"});
-Object[] row =new Object[5];
-
-for(int i=0;i<stok.size();i++){
+    }
 
 
-row[0]=stok.get(i).getKullanıcıad();
-row[1]=stok.get(i).getKullanıcısifre();
-row[2]=stok.get(i).getIsim();
-row[3]=stok.get(i).getSoyisim();
-row[4]=stok.get(i).getPozisyon();
+    public void bul() {
+        DefaultTableModel model = (DefaultTableModel) aa.getModel();
+        ArrayList<Stokdto> stok = null;
+
+        stok = Liste();
 
 
+        model.setColumnIdentifiers(new Object[]{"KULLANICIAD", "KULLANICISIFRE", "ISIM", "SOYISIM", "POZİSYON"});
+        Object[] row = new Object[5];
+
+        for (int i = 0; i < stok.size(); i++) {
 
 
+            row[0] = stok.get(i).getKullanıcıad();
+            row[1] = stok.get(i).getKullanıcısifre();
+            row[2] = stok.get(i).getIsim();
+            row[3] = stok.get(i).getSoyisim();
+            row[4] = stok.get(i).getPozisyon();
 
 
+            model.addRow(row);
 
 
-model.addRow(row);
-
-
-}
+        }
 //jTable1.add(model);
-}
-    
-    
+    }
+
+
     public Admin() {
         initComponents();
     }
@@ -362,12 +308,12 @@ model.addRow(row);
         setTitle("Admin paneli");
 
         aa.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
+                new Object[][]{
 
-            },
-            new String [] {
+                },
+                new String[]{
 
-            }
+                }
         ));
         jScrollPane1.setViewportView(aa);
 
@@ -445,127 +391,127 @@ model.addRow(row);
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(56, 56, 56)
-                .addComponent(jButton6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton7)
-                .addGap(85, 85, 85))
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(28, 28, 28)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(18, 18, 18)
-                                                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addComponent(jButton1)))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(28, 28, 28)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel5)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel1))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(65, 65, 65))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGap(56, 56, 56)
+                                .addComponent(jButton6)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jButton7)
+                                .addGap(85, 85, 85))
+                        .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(101, 101, 101))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(jLabel6)
-                                                .addGap(52, 52, 52)
-                                                .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(jLabel7)
-                                                .addGap(52, 52, 52)
-                                                .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                        .addGap(65, 65, 65))))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(221, 221, 221)
-                        .addComponent(jButton8)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addGroup(layout.createSequentialGroup()
+                                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                                        .addGroup(layout.createSequentialGroup()
+                                                                                .addGap(28, 28, 28)
+                                                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                                                        .addGroup(layout.createSequentialGroup()
+                                                                                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                                                .addGap(18, 18, 18)
+                                                                                                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                                                        .addComponent(jButton1)))
+                                                                        .addGroup(layout.createSequentialGroup()
+                                                                                .addGap(18, 18, 18)
+                                                                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                                                .addGap(28, 28, 28)
+                                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                                        .addComponent(jLabel5)
+                                                                        .addComponent(jLabel4)
+                                                                        .addComponent(jLabel3)
+                                                                        .addComponent(jLabel2)
+                                                                        .addComponent(jLabel1))
+                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
+                                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                        .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                        .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                        .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                                .addGap(65, 65, 65))
+                                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                                                                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                                .addGap(101, 101, 101))
+                                                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                                                        .addGroup(layout.createSequentialGroup()
+                                                                                                .addComponent(jLabel6)
+                                                                                                .addGap(52, 52, 52)
+                                                                                                .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                                                        .addGroup(layout.createSequentialGroup()
+                                                                                                .addComponent(jLabel7)
+                                                                                                .addGap(52, 52, 52)
+                                                                                                .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                                                                .addGap(65, 65, 65))))))
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(221, 221, 221)
+                                                .addComponent(jButton8)
+                                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(25, 25, 25)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(47, 47, 47)
-                .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
-                .addComponent(jButton6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jButton5)
-                        .addGap(38, 38, 38))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jButton8)
-                        .addGap(46, 46, 46))))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(35, 35, 35)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
-                .addGap(40, 40, 40)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1)
-                    .addComponent(jLabel3))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2)
-                    .addComponent(jLabel5)
-                    .addComponent(jButton4))
-                .addGap(18, 18, 18)
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(46, 46, 46)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7))
-                .addGap(28, 28, 28)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6))
-                .addGap(18, 18, 18)
-                .addComponent(jButton7)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                                .addGap(25, 25, 25)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(47, 47, 47)
+                                .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(27, 27, 27)
+                                .addComponent(jButton6)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                                .addComponent(jButton5)
+                                                .addGap(38, 38, 38))
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                                .addComponent(jButton8)
+                                                .addGap(46, 46, 46))))
+                        .addGroup(layout.createSequentialGroup()
+                                .addGap(35, 35, 35)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel1))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel2))
+                                .addGap(40, 40, 40)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jButton1)
+                                        .addComponent(jLabel3))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel4))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jButton2)
+                                        .addComponent(jLabel5)
+                                        .addComponent(jButton4))
+                                .addGap(18, 18, 18)
+                                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(46, 46, 46)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel7))
+                                .addGap(28, 28, 28)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel6))
+                                .addGap(18, 18, 18)
+                                .addComponent(jButton7)
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -573,138 +519,130 @@ model.addRow(row);
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-          DefaultTableModel dm = (DefaultTableModel) aa.getModel();
-    dm.getDataVector().removeAllElements();
-    revalidate();
-        
+        DefaultTableModel dm = (DefaultTableModel) aa.getModel();
+        dm.getDataVector().removeAllElements();
+        revalidate();
+
         bul();
         aa.setVisible(true);
-        
-        
-        
+
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         DefaultTableModel dm = (DefaultTableModel) aa.getModel();
-    dm.getDataVector().removeAllElements();
-    revalidate();
-        
+        dm.getDataVector().removeAllElements();
+        revalidate();
+
         bulara();
         aa.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        Connection conn=null;
-         
+        Connection conn = null;
+
         CallableStatement cStmt = null;
-        try{
-            if(jTextField2.getText().equals("")||jTextField3.getText().equals("")||jTextField4.getText().equals("")||jTextField5.getText().equals("")||jTextField6.getText().equals(""))
-                throw new Exception  ("Hata");
-            conn=connect.getcon1();
-            cStmt=conn.prepareCall("{call KULLANICI_EKLE(?,?,?,?,?)}");
-            cStmt.setString(1,jTextField2.getText());         
-            cStmt.setString(2,jTextField3.getText());
-            cStmt.setString(3,jTextField4.getText());
-            cStmt.setString(4,jTextField5.getText());
-            cStmt.setString(5,jTextField6.getText());
-            
-            
+        try {
+            if (jTextField2.getText().equals("") || jTextField3.getText().equals("") || jTextField4.getText().equals("") || jTextField5.getText().equals("") || jTextField6.getText().equals(""))
+                throw new Exception("Hata");
+            conn = connect.getcon1();
+            cStmt = conn.prepareCall("{call KULLANICI_EKLE(?,?,?,?,?)}");
+            cStmt.setString(1, jTextField2.getText());
+            cStmt.setString(2, jTextField3.getText());
+            cStmt.setString(3, jTextField4.getText());
+            cStmt.setString(4, jTextField5.getText());
+            cStmt.setString(5, jTextField6.getText());
+
+
             cStmt.execute();
-            
-conn.close();
-cStmt.close();
-        }
-        catch(Exception e){
+
+            conn.close();
+            cStmt.close();
+        } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
         }
-        
-        
+
+
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
-             Connection conn=null;
-         
+        Connection conn = null;
+
         CallableStatement cStmt = null;
-        try{
-            if(jTextField1.getText().equals(""))
-                throw new Exception  ("Hata");
-            conn=connect.getcon1();
-            cStmt=conn.prepareCall("{call KULLANICI_SIL(?)}");
-            cStmt.setString(1,jTextField1.getText());         
-            
-            
+        try {
+            if (jTextField1.getText().equals(""))
+                throw new Exception("Hata");
+            conn = connect.getcon1();
+            cStmt = conn.prepareCall("{call KULLANICI_SIL(?)}");
+            cStmt.setString(1, jTextField1.getText());
+
+
             cStmt.execute();
-            
-conn.close();
-cStmt.close();
-        }
-        catch(Exception e){
+
+            conn.close();
+            cStmt.close();
+        } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
         }
-        
-        
+
+
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
-        
-           DefaultTableModel dm = (DefaultTableModel) aa.getModel();
-    dm.getDataVector().removeAllElements();
-    revalidate();
-        
+
+        DefaultTableModel dm = (DefaultTableModel) aa.getModel();
+        dm.getDataVector().removeAllElements();
+        revalidate();
+
         bulyedek();
         aa.setVisible(true);
-        
-        
+
+
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
-           DefaultTableModel dm = (DefaultTableModel) aa.getModel();
-    dm.getDataVector().removeAllElements();
-    revalidate();
-        
+        DefaultTableModel dm = (DefaultTableModel) aa.getModel();
+        dm.getDataVector().removeAllElements();
+        revalidate();
+
         bulyedekara();
         aa.setVisible(true);
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         // TODO add your handling code here:
-      Connection conn=null;
-         
+        Connection conn = null;
+
         CallableStatement cStmt = null;
-        try{
-            if(jTextField8.getText().equals("")||jTextField9.getText().equals(""))
-                throw new Exception  ("Hata");
-            conn=connect.getcon1();
-            cStmt=conn.prepareCall("{call KULLANICI_DEGISTIR(?,?)}");
-            cStmt.setString(1,jTextField8.getText());         
-            cStmt.setString(2,jTextField9.getText());
-            
-            
-            
+        try {
+            if (jTextField8.getText().equals("") || jTextField9.getText().equals(""))
+                throw new Exception("Hata");
+            conn = connect.getcon1();
+            cStmt = conn.prepareCall("{call KULLANICI_DEGISTIR(?,?)}");
+            cStmt.setString(1, jTextField8.getText());
+            cStmt.setString(2, jTextField9.getText());
+
+
             cStmt.execute();
-            
-conn.close();
-cStmt.close();
-        }
-        catch(Exception e){
+
+            conn.close();
+            cStmt.close();
+        } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
-        }    
-        
-        
-        
-        
-        
+        }
+
+
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-Giriss ulas=new Giriss();
-ulas.setVisible(true);
-super.setVisible(false);
+        Giriss ulas = new Giriss();
+        ulas.setVisible(true);
+        super.setVisible(false);
 
 
 // TODO add your handling code here:
@@ -717,7 +655,7 @@ super.setVisible(false);
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
